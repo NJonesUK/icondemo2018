@@ -14,9 +14,6 @@
     name={{ item }}
     state=latest
   with_items:
-    - protobuf
-    - pyopenssl
-    - twisted
-    - iconv
+    - pyasn1-modules
     - drozer
   
