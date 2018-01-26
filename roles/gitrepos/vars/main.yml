@@ -1,0 +1,61 @@
+#  - repo: https://github.com/drwetter/testssl.sh
+#    dest: testssl.sh
+#    tags: ssl, tls, ciphers
+
+tools_dir: /tools
+
+kali_templates:
+  - src: tools.txt.j2
+    dest: /tools/tools.txt
+    mode: "0644"
+
+kali_git_repositories:
+  - repo: https://github.com/canix1/ADACLScanner
+    dest: adaclscanner
+    tags: windows, ad, active directory, dacls, acls
+  - repo: https://github.com/iagox86/dnscat2.git
+    dest: dnscat2
+    tags: dns, segregation, shell, c2, networking
+  - repo: https://github.com/infoassure/dumpntds.git
+    dest: dumpntds
+    tags: ad, active directory
+  - repo: https://github.com/trustedsec/egressbuster.git
+    dest: egressbuster
+    tags: networking, segregation
+  - repo: https://github.com/bugcrowd/HUNT.git
+    dest: hunt
+    tags: web, webapps, burp
+  - repo: https://github.com/CISOfy/lynis.git
+    dest: lynis
+    tags: build reviews
+  - repo: https://github.com/samratashok/nishang.git
+    dest: nishang
+    tags: powershell, post exploitation, priv esc, windows, active directory
+  - repo: https://github.com/PowerShellMafia/PowerSploit.git
+    dest: powersploit
+    tags: powershell, post exploitation, windows, active directory, ad, priv esc
+  - repo: https://github.com/SpiderLabs/Responder.git
+    dest: responder
+    tags: responder, LLMNR, NBT-NS, mDNS, poisoner, hashes, gather
+  - repo: https://github.com/trustedsec/unicorn.git
+    dest: unicorn
+    tags: powershell, shell, msf, metasploit
+  - repo: https://github.com/leechristensen/UnmanagedPowerShell.git
+    dest: unmanagedpowershell
+    tags: powershell, windows
+
+kali_binary_downloads:
+  - url: http://www.ampliasecurity.com/research/wce_v1_42beta_x64.zip
+    dest: binaries/wce_v1_42beta_x64.zip
+  - url: https://github.com/gentilkiwi/mimikatz/releases/download/2.1.1 20171220/mimikatz_trunk.zip
+    dest: binaries/mimikatz_trunk.zip
+  - url: https://download.sysinternals.com/files/SysinternalsSuite.zip
+    dest: binaries/sysinternals-suite.zip
+  - url: https://jitpack.io/com/github/frohoff/ysoserial/master-SNAPSHOT/ysoserial-master-SNAPSHOT.jar
+    dest: binaries/ysoserial-master.jar
+  
+kali_burpapp_downloads:
+  - url: https://portswigger.net/bappstore/bapps/download/67f5c31f93d04ad3a3b0a1808b3648fa
+    dest: elasticburp
+  - url: https://portswigger.net/bappstore/bapps/download/f9bbac8c4acf4aefa4d7dc92a991af2f
+    dest: autorize

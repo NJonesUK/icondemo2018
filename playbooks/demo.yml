@@ -1,0 +1,23 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+  roles:
+    - role: kali
+      tags: kali
+    - role: gitrepos
+      tags: gitrepos
+    - role: elasticsearch
+      tags: elasticsearch
+    - role: drozer
+      tags: drozer
+    - role: needle
+      tags: needle
+    - role: docugen
+      tags: docugen
+  vars:
+    - tools_dir: /tools
+    - hostname: "njones-mwr-kali"
+    - kali_ufw_tcp_allow:
+        - 22

@@ -1,0 +1,2 @@
+drozer_deb_url: https://github.com/mwrlabs/drozer/releases/download/2.4.3/drozer_2.4.3.deb
+drozer_protobuf_url: https://github.com/google/protobuf/releases/download/v3.5.1/protoc-3.5.1-linux-x86_64.zip

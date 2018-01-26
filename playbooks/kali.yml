@@ -1,0 +1,45 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+  roles:
+    # - role: bloodhound
+    #   tags: bloodhound
+    - role: kali
+      tags: kali
+    - role: cloudfail
+      tags: cloudfail
+    - role: det
+      tags: det
+    - role: docker
+      tags: docker
+    - role: eyewitness
+      tags: eyewitness
+    - role: elasticsearch
+      tags: elasticsearch
+    - role: kaitai-struct
+      tags: kaitai-struct
+    # - role: nick-specific
+    #   tags: nick
+    # - role: pupy
+    #   tags: pupy
+    - role: pyfiscan
+      tags: pyfiscan
+    - role: redsnarf
+      tags: redsnarf
+    - role: routersploit
+      tags: routersploit
+    - role: sparta
+      tags: sparta
+    - role: spartan
+      tags: spartan
+    - role: sublimetext
+      tags: sublimetext
+    # - role: veles
+    #   tags: veles
+  vars:
+    - tools_dir: /tools
+    - hostname: "njones-mwr-kali"
+    - kali_ufw_tcp_allow:
+        - 22

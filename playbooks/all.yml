@@ -1,0 +1,8 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+- import_playbook: kali.yml
+- import_playbook: git-repos.yml
+- import_playbook: mobile.yml

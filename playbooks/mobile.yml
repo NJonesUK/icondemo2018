@@ -1,0 +1,21 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+  roles:
+    - role: mobile-bootstrap
+      tags: bootstrap
+    - role: drozer
+      tags: drozer
+    - role: needle
+      tags: needle
+    - role: apktool
+      tags: apktool
+    - role: ideviceinstaller
+      tags: ideviceinstaller
+  vars:
+    - tools_dir: /tools
+    - hostname: "njones-mwr-kali"
+    - kali_ufw_tcp_allow:
+        - 22

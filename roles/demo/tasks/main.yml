@@ -1,0 +1,84 @@
+# tasks file for kali
+
+- name: Remove unwanted packages
+  apt:
+    name={{ item }}
+    force=yes
+    purge=yes
+    state=absent
+  with_items: "{{ kali_packages_remove|default([]) }}"
+
+- name: Update packages
+  apt:
+    update_cache=yes
+    upgrade=dist
+    cache_valid_time=3600
+  # async: 60
+  # poll: 60
+
+- name: Install common packages
+  apt:
+    name={{ item }}
+    update_cache=yes
+    cache_valid_time=3600
+    install-recommends=no
+    state=present
+  with_items: "{{ kali_packages|default([]) }}"
+
+- name: Install common pip packages
+  pip:
+    name={{ item }}
+    state=latest
+  with_items: "{{ kali_pip_packages|default([]) }}"
+
+- name: Add users
+  user:
+    name={{ item.name }}
+    comment="{{ item.comment }}"
+    shell={{ item.shell }}
+    state=present
+  with_items: "{{ kali_users|default([]) }}"
+
+- name: Apply / deploy common templates
+  template:
+    src={{ item.src }}
+    dest={{ item.dest }}
+    mode={{ item.mode }}
+  with_items:
+    - "{{ kali_templates|default([]) }}"
+  tags:
+    - templates
+
+- name: Allow ssh (and any other default ports) through firewall
+  ufw: rule=allow proto=tcp port={{ item }}
+  notify:
+    - reload ufw
+  with_items: "{{ kali_ufw_tcp_allow|default([22]) }}"
+
+- name: Make sure firewall is up and running, set to deny by default
+  ufw: state=enabled policy=deny
+  notify:
+    - reload ufw
+  tags:
+    - ssh
+
+- name: Remove insufficient moduli settings
+  lineinfile:
+    dest=/etc/ssh/moduli
+    regexp="{{ item }}"
+    line="{{ item }}"
+    state=absent
+  with_items: "{{ sshd_moduli_remove|default([]) }}"
+  notify:
+    - restart sshd
+
+- name: Set hostname
+  hostname: name="{{ hostname|default("kaliped") }}"
+  tags:
+    - hostname
+
+- name: Add public SSH keys per user
+  authorized_key:
+    user={{ item.name }}
+    key="{{ item.ssh_key }}"
+  with_items: "{{ kali_user_keys|default([]) }}"

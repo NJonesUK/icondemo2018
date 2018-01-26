@@ -1,0 +1,11 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+  roles:
+    - role: gitrepos
+      tags: gitrepos
+  vars:
+    - tools_dir: /tools/
+

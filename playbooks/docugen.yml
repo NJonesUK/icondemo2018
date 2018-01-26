@@ -1,0 +1,10 @@
+---
+# file: kali.yml
+- hosts: kali
+  become: yes
+  become_method: sudo
+  roles:
+    - role: docugen
+      tags: docugen
+  vars:
+    - tools_dir: /tools

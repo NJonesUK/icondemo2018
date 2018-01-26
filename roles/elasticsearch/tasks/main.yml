@@ -1,0 +1,31 @@
+- name: Install packages for apt over HTTPS
+  apt:
+    name={{item}}
+    state=installed
+    update_cache=yes
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+
+- name: Add Elastic apt key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+
+- name: Add Elastic apt repository
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/6.x/apt stable main
+    state: present
+
+- name: Update packages
+  apt:
+    update_cache=yes
+
+- name: Install ElasticSearch via apt
+  apt:
+    name=elasticsearch
+    install-recommends=no
+    state=present

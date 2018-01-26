@@ -1,0 +1,115 @@
+kali_tool_dir: /tools
+kali_directories:
+  - path={{ kali_tool_dir }}
+    mode="2770"
+    owner=root
+    group=git
+  - path={{ kali_tool_dir }}/docs/
+    mode="2770"
+    owner=root
+    group=git
+kali_groups:
+  - git
+  - sudo
+kali_users:
+  - name: nick
+    comment: "Nick Jones - MWR InfoSecurity"
+    shell: /bin/bash
+kali_user_keys:
+  - name: nick
+    ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCxYq5XB8pwFiUiescBnrLkRdlI1AuZWcwgzeGMT5n0lbw9+D1/x3D2vhpHq9Pe82wTpnBQJhntBQVukDHDJNLwnrxWJSkzz98IdNA6kid1aQ487NfUZiTCmiITdPKfMVAFMS2O52NSPPSQa0b9O4NaubqAtfD5gBedo1MVff3sCn1ypxeHCdzfqn4XwYbhWrxy106vr1LYHK6YbHsYH0tTFZekvZNtvi7raRLgsvK0J7jLcmd1epQ/+9ARDMdyHpmjbr73ccD/KpYIJRslMbUryFakRcOKa5xR9Guq2gjDLou9eFA/1OMvSTVKytAuc5aecOquue60SN50n2qJyCwP Nick@PC"
+kali_templates:
+  - src: hosts.j2
+    dest: /etc/hosts
+    mode: "0644"
+  - src: issue.ssh.j2
+    dest: /etc/issue.ssh
+    mode: "0644"
+  - src: sshd_config.j2
+    dest: /etc/ssh/sshd_config
+    mode: "0644"
+company: "Nick Jones"
+grub_settings:
+  - name: "GRUB_TIMEOUT"
+    value: "0"
+  - name: "GRUB_RECORDFAIL_TIMEOUT"
+    value: "0"
+sshd_banner: /etc/issue.ssh
+sshd_ciphers: "chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr"
+sshd_gssapiauthentication: "no"
+sshd_hostkeyalgorithms: "ssh-ed25519-cert-v01@openssh.com,ssh-rsa-cert-v01@openssh.com,ssh-ed25519,ssh-rsa"
+sshd_kexalgorithms: "curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256"
+sshd_macs: "hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-ripemd160-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-512,hmac-sha2-256,hmac-ripemd160,umac-128@openssh.com"
+sshd_moduli_remove:
+  - 1023
+  - 1535
+sshd_passwordauthentication: "yes"
+sshd_permitemptypasswords: "no"
+sshd_permitrootlogin: "yes"
+sshd_pubkeyauthentication: "yes"
+sshd_rsaauthentication: "yes"
+sshd_usedns: "no"
+sshd_usepam: "yes"
+sshd_x11forwarding: "no"
+kali_packages:
+  - aptitude
+  - backdoor-factory
+  - bdfproxy
+  - ca-certificates
+  - curl
+  - chromium
+  - docker-compose
+  - exe2hexbat
+  - fruitywifi
+  - g++
+  - git
+  - hashid
+  - htop
+  - ipcalc
+  - libssl-dev
+  - libffi-dev
+  - locate
+  - lsof
+  - meld
+  - nmap
+  - ntp
+  - openssl
+  - p7zip-full
+  - pixiewps
+  - python-dev
+  - python-pip
+  - python-setuptools
+  - reaver
+  - rsh-client
+  - shellter
+  - sipcalc
+  - sshpass
+  - sshuttle
+  - sudo
+  - tmux
+  - ufw
+  - unzip
+  - wireshark
+  - zsh
+kali_packages_remove:
+  - crda
+  - cups
+kali_pip_packages:
+  - ansible
+  - awsscout2
+  - boto
+  - bs4
+  - cryptography
+  #- dockerscan
+  - hashpumpy
+  - manticore
+  - mongoaudit
+  - paramiko
+  - python-nmap
+  - python-wappalyzer
+  - requests
+  - scapy
+  - sslyze
+  - xlrd
+  - z3
+  - zeep

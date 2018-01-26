@@ -1,0 +1,51 @@
+# tasks file for kali
+
+- name: Make directory for git repositories
+  file:
+    path={{ tools_dir }}
+    state=directory
+    mode=0755
+
+- name: Install common git repositories
+  git:
+    repo={{ item.repo }}
+    dest={{tools_dir}}/{{ item.dest }}
+    accept_hostkey=yes
+    version={{ item.version|default(\"master\") }}
+    force={{ item.force|default("no") }}
+  with_items:
+    - "{{ kali_git_repositories|default([]) }}"
+
+- name: Create folder for binaries
+  file:
+    path={{ tools_dir }}/binaries
+    state=directory
+
+- name: Download default binaries
+  get_url:
+    url={{ item.url }}
+    dest={{ tools_dir }}/{{ item.dest }}
+  with_items:
+    - "{{ kali_binary_downloads|default([]) }}"
+
+- name: Create folder for burp apps
+  file:
+    path={{ tools_dir }}/burpapps
+    state=directory
+
+- name: Download burp apps
+  get_url:
+    url={{ item.url }}
+    dest={{ tools_dir }}/burpapps/{{ item.dest }}
+  with_items:
+    - "{{ kali_burpapp_downloads|default([]) }}"
+
+
+- name: Generate tools listing
+  template:
+    src={{ item.src }}
+    dest={{ item.dest }}
+    mode={{ item.mode }}
+  with_items:
+    - "{{ kali_templates|default([]) }}"
+
