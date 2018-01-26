@@ -29,5 +29,3 @@
     name=elasticsearch
     install-recommends=no
     state=present
-  notify:
-    - start elasticsearch

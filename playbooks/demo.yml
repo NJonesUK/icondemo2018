@@ -8,8 +8,8 @@
       tags: demo
     - role: gitrepos
       tags: gitrepos
-    - role: elasticsearch
-      tags: elasticsearch
+    # - role: elasticsearch
+    #   tags: elasticsearch
     - role: drozer
       tags: drozer
   vars:
