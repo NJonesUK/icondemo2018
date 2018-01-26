@@ -1,5 +1,5 @@
 ---
 # handlers file for elasticsearch
 
-- name: restart elasticsearch
-  service: name=elasticsearch state=restarted
+- name: start elasticsearch
+  service: name=elasticsearch state=started
